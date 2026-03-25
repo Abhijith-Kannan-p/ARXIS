@@ -43,6 +43,7 @@ export default function HeroCanvas() {
     let rafId: number
 
     function resize() {
+      if (!canvas) return // The Next.js 15 safety check
       W = canvas.width  = canvas.offsetWidth
       H = canvas.height = canvas.offsetHeight
     }
