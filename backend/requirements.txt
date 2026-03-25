@@ -1,0 +1,26 @@
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.1
+
+# Data — flexible versions so pip uses pre-built wheels on Windows
+yfinance>=0.2.40
+pandas>=2.0.0
+numpy>=1.26.0
+
+# Models
+hmmlearn>=0.3.2
+scikit-learn>=1.4.0
+scipy>=1.13.0
+
+# RL — install CPU-only torch to avoid huge download
+torch>=2.1.0
+stable-baselines3>=2.3.0
+sb3-contrib>=2.3.0
+gymnasium>=0.29.0
+
+# Optimisation
+cvxpy>=1.4.0
+
+# Utils
+httpx>=0.27.0
+python-dotenv>=1.0.1

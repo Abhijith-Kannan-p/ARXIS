@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+    --font-syne: 'Syne', sans-serif;
+    --font-jetbrains: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  ::-webkit-scrollbar        { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track  { background: transparent; }
+  ::-webkit-scrollbar-thumb  { background: #45475a; border-radius: 2px; }
+
+  input[type=range] {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 16px;
+    background: transparent;
+    outline: none;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 2px;
+    background: #45475a;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-top: -6px;
+    background: #cba6f7;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(203,166,247,0.4);
+  }
+  input[type=range]::-moz-range-track {
+    height: 4px;
+    border-radius: 2px;
+    background: #45475a;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: none;
+    background: #cba6f7;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  /* ── Cards ─────────────────────────────── */
+  .card {
+    @apply bg-mantle border border-surface0 rounded-[14px] p-5;
+  }
+  .glow-card {
+    @apply bg-mantle border border-surface0 rounded-[14px] p-5
+           transition-all duration-300
+           hover:border-mauve hover:shadow-[0_0_24px_rgba(203,166,247,0.1)];
+  }
+
+  /* ── Regime badges ─────────────────────── */
+  .regime-badge {
+    @apply inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full
+           text-xs font-semibold border;
+  }
+  .regime-0 { @apply bg-green/10 text-green border-green/30; }
+  .regime-1 { @apply bg-yellow/10 text-yellow border-yellow/30; }
+  .regime-2 { @apply bg-peach/10 text-peach border-peach/30; }
+  .regime-3 { @apply bg-red/10 text-red border-red/30; }
+
+  /* ── Section label ─────────────────────── */
+  .section-label {
+    @apply text-[10px] text-overlay0 uppercase tracking-widest mb-3 pl-0.5;
+  }
+
+  /* ── Metric row ────────────────────────── */
+  .metric-row {
+    @apply flex justify-between items-center py-2 border-b border-surface0 last:border-0;
+  }
+  .metric-label { @apply text-[11px] text-overlay1; }
+  .metric-val   { @apply text-[13px] text-text font-medium; }
+
+  /* ── Tags ──────────────────────────────── */
+  .tag { @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold; }
+  .tag-green  { @apply bg-green/15 text-green; }
+  .tag-yellow { @apply bg-yellow/15 text-yellow; }
+  .tag-red    { @apply bg-red/15 text-red; }
+  .tag-blue   { @apply bg-blue/15 text-blue; }
+  .tag-mauve  { @apply bg-mauve/15 text-mauve; }
+  .tag-peach  { @apply bg-peach/15 text-peach; }
+
+  /* ── Disclaimer ────────────────────────── */
+  .disclaimer {
+    @apply bg-yellow/5 border border-yellow/20 rounded-lg
+           px-3.5 py-2 text-[10px] text-yellow mb-5
+           flex items-center gap-2;
+  }
+
+  /* ── Input ─────────────────────────────── */
+  .input-field {
+    @apply w-full bg-surface0 border border-surface1 rounded-[10px]
+           px-3.5 py-2.5 text-text text-[13px] font-mono
+           outline-none transition-colors focus:border-mauve;
+  }
+
+  /* ── Buttons ───────────────────────────── */
+  .btn {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px]
+           border-none font-mono text-xs cursor-pointer transition-all
+           font-medium;
+  }
+  .btn-primary {
+    @apply bg-mauve text-crust
+           hover:bg-lavender hover:-translate-y-px
+           hover:shadow-[0_4px_16px_rgba(203,166,247,0.3)];
+  }
+  .btn-ghost {
+    @apply bg-surface0 text-text border border-surface1
+           hover:bg-surface1;
+  }
+
+  /* ── Alert rows ────────────────────────── */
+  .alert-row {
+    @apply flex items-center gap-3 px-3.5 py-2.5 rounded-[10px] border text-xs mb-2;
+  }
+  .alert-green  { @apply bg-green/5  border-green/30  text-green; }
+  .alert-yellow { @apply bg-yellow/5 border-yellow/30 text-yellow; }
+  .alert-red    { @apply bg-red/5    border-red/30    text-red; }
+
+  /* ── Heatmap cell ──────────────────────── */
+  .heatmap-cell {
+    @apply inline-flex items-center justify-center w-16 h-10
+           rounded-md text-[11px] font-semibold
+           transition-transform hover:scale-110;
+  }
+
+  /* ── Recharts overrides ────────────────── */
+  .recharts-tooltip-wrapper .recharts-default-tooltip {
+    background: #181825 !important;
+    border: 1px solid #45475a !important;
+    border-radius: 8px !important;
+  }
+  .recharts-text { fill: #9399b2 !important; font-size: 11px !important; }
+  .recharts-cartesian-grid-horizontal line,
+  .recharts-cartesian-grid-vertical line {
+    stroke: rgba(69,71,90,0.4) !important;
+  }
+}
+
+/* ── Loader spinner ────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border: 2px solid #cba6f7;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
