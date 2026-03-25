@@ -36,7 +36,7 @@ export default function MonitorPage() {
   const { executionResult, selectedStock } = useStore()
   const [logs, setLogs] = useState(LOG_SEED.slice(0, 3))
   const [logIdx, setLogIdx] = useState(3)
-  const timerRef = useRef<NodeJS.Timeout>()
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     if (!executionResult && !selectedStock) router.replace('/configure')
@@ -46,12 +46,17 @@ export default function MonitorPage() {
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setLogIdx(i => {
-        if (i >= LOG_SEED.length) { clearInterval(timerRef.current); return i }
+        if (i >= LOG_SEED.length) { 
+          if (timerRef.current) clearInterval(timerRef.current); 
+          return i 
+        }
         setLogs(prev => [LOG_SEED[i], ...prev].slice(0, 12))
         return i + 1
       })
     }, 2400)
-    return () => clearInterval(timerRef.current)
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    }
   }, [])
 
   // Intraday price simulation
