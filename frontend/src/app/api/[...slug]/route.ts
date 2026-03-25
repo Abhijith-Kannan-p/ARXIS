@@ -1,11 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest, { params }: { params: { slug: string[] } }) {
-  return proxyRequest(request, params.slug)
+export async function GET(
+  request: NextRequest, 
+  { params }: { params: Promise<{ slug: string[] }> }
+) {
+  const resolvedParams = await params
+  return proxyRequest(request, resolvedParams.slug)
 }
 
-export async function POST(request: NextRequest, { params }: { params: { slug: string[] } }) {
-  return proxyRequest(request, params.slug)
+export async function POST(
+  request: NextRequest, 
+  { params }: { params: Promise<{ slug: string[] }> }
+) {
+  const resolvedParams = await params
+  return proxyRequest(request, resolvedParams.slug)
 }
 
 async function proxyRequest(request: NextRequest, slug: string[]) {
