@@ -40,7 +40,12 @@ export default function ConfigurePage() {
   // ── Search ───────────────────────────────────────────────────
   const handleSearch = useCallback(async (val: string) => {
     setQuery(val)
-    clearTimeout(debounceRef.current)
+    
+    // TypeScript strict check for the timeout reference
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current)
+    }
+    
     if (!val) { setShowDrop(false); return }
 
     // Instant local filter
