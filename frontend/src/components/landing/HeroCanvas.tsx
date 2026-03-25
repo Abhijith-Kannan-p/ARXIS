@@ -86,6 +86,7 @@ export default function HeroCanvas() {
     }
 
     function onInteract(e: MouseEvent | TouchEvent) {
+      if (!canvas) return
       const rect = canvas.getBoundingClientRect()
       const src  = 'touches' in e ? e.touches[0] : e
       const x    = src.clientX - rect.left
