@@ -35,7 +35,7 @@ export default function ConfigurePage() {
   const [riskVal, setRiskVal]         = useState(50)
   const [generating, setGenerating]   = useState(false)
   const [genStep, setGenStep]         = useState('')
-  const debounceRef = useRef<NodeJS.Timeout>()
+  const debounceRef = useRef<NodeJS.Timeout | null>(null)
 
   // ── Search ───────────────────────────────────────────────────
   const handleSearch = useCallback(async (val: string) => {
